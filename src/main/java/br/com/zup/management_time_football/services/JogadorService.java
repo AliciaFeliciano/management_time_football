@@ -1,26 +1,72 @@
 package br.com.zup.management_time_football.services;
 
 import br.com.zup.management_time_football.models.Jogador;
-import br.com.zup.management_time_football.repositories.JogadorRepositorie;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.zup.management_time_football.repositories.JogadorRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+
+
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class JogadorService {
 
-    @Autowired
-    private JogadorRepositorie jogadorRepositorie;
+    private JogadorRepository jogadorRepository;
+
+    public JogadorService(JogadorRepository jogadorRepository) {
+        this.jogadorRepository = jogadorRepository;
+    }
 
     public Jogador saveJogador(Jogador jogador) {
-        return jogadorRepositorie.save(jogador);
+        if (jogadorRepository.existsByCpf(jogador.getCpf())) {
+            throw new IllegalArgumentException("Já existe um jogador cadastrado com esse CPF.");
+        }
+
+        return jogadorRepository.save(jogador);
     }
 
-    public List<Jogador> showAllJogador(){
-        return jogadorRepositorie.findAll();
+    public List<Jogador> showAllJogador() {
+        return jogadorRepository.findAll();
     }
 
+
+    public Jogador findJogador(Long id) {
+        Optional<Jogador> jogadorOptional = jogadorRepository.findById(id);
+
+        return jogadorOptional.orElseThrow(() -> new EntityNotFoundException("Jogador não encontrado"));
+    }
+
+    @Transactional
+    public Jogador updateJogador(Jogador jogador) {
+        Jogador jogadorDB = findJogador(jogador.getId());
+
+        if (!jogadorDB.getNome().equals(jogador.getNome())) {
+            jogadorDB.setNome(jogador.getNome());
+        }
+        if (jogadorDB.getIdade() != jogador.getIdade()) {
+            jogadorDB.setIdade(jogador.getIdade());
+        }
+        if (!jogadorDB.getCpf().equals(jogador.getCpf())) {
+            if (jogadorRepository.existsByCpf(jogador.getCpf())) {
+                throw new IllegalArgumentException("Já existe um jogador cadastrado com esse CPF.");
+            }
+            jogadorDB.setCpf(jogador.getCpf());
+        }
+        if (!jogadorDB.getDataNasc().equals(jogador.getDataNasc())) {
+            jogadorDB.setDataNasc(jogador.getDataNasc());
+        }
+        if (!jogadorDB.getSexo().equals(jogador.getSexo())) {
+            jogadorDB.setSexo(jogador.getSexo());
+        }
+
+        return saveJogador(jogadorDB);
+    }
+
+    public void deleteJogador(Long id) {
+        Jogador jogador = findJogador(id);
+        jogadorRepository.deleteById(jogador.getId());
+    }
 }
