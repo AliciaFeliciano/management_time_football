@@ -27,6 +27,10 @@ public class Jogador {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
+    @ManyToOne
+    @JoinColumn(name = "time_id")
+    private Time time;
+
     public Jogador(){}
 
     public Long getId() {return id;}
@@ -56,4 +60,9 @@ public class Jogador {
     public Endereco getEndereco() {return endereco;}
 
     public void setEndereco(Endereco endereco) {this.endereco = endereco;}
+
+    public Time getTime() {return time;}
+
+    public void setTime(Time time) {this.time = time;}
+
 }

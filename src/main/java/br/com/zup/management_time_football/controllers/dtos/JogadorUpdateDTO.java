@@ -23,6 +23,8 @@ public class JogadorUpdateDTO {
     private LocalDate dataNasc;
     @NotNull
     private EnderecoUpdateDTO endereco;
+    @NotNull
+    private TimeUpdateDTO time;
 
     public JogadorUpdateDTO() {}
 
@@ -55,4 +57,7 @@ public class JogadorUpdateDTO {
 
     public void setEndereco(EnderecoUpdateDTO endereco) {this.endereco = endereco;}
 
+    public @NotNull TimeUpdateDTO getTime() {return time;}
+
+    public void setTime(@NotNull TimeUpdateDTO time) {this.time = time;}
 }

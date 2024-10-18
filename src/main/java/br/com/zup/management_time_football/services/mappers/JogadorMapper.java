@@ -4,11 +4,13 @@ import br.com.zup.management_time_football.controllers.dtos.JogadorRegisterDTO;
 import br.com.zup.management_time_football.controllers.dtos.JogadorUpdateDTO;
 import br.com.zup.management_time_football.models.Endereco;
 import br.com.zup.management_time_football.models.Jogador;
+import br.com.zup.management_time_football.models.Time;
 
 public class JogadorMapper {
 
     public static Jogador fromJogadorRegisterDTO(JogadorRegisterDTO jogadorRegisterDTO) {
         Jogador jogador = new Jogador();
+        jogador.setId(jogadorRegisterDTO.getId());
         jogador.setNome(jogadorRegisterDTO.getNome());
         jogador.setCpf(jogadorRegisterDTO.getCpf());
         jogador.setIdade(jogadorRegisterDTO.getIdade());
@@ -22,6 +24,7 @@ public class JogadorMapper {
 
         return jogador;
     }
+
 
     public static Jogador fromJogadorUpdateDTO(JogadorUpdateDTO jogadorUpdateDTO) {
         Jogador jogador = new Jogador();
@@ -40,7 +43,4 @@ public class JogadorMapper {
 
         return jogador;
     }
-
-
-
 }

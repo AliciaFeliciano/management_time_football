@@ -22,13 +22,14 @@ public class JogadorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Jogador JogadorRegister(@RequestBody @Valid JogadorRegisterDTO jogadorRegisterDTO) {
-        return jogadorService.saveJogador(JogadorMapper.fromJogadorRegisterDTO(jogadorRegisterDTO));
+    public Jogador JogadorRegister(@RequestBody @Valid JogadorRegisterDTO jogadorRegisterDTO, @RequestParam Long timeId) {
+        Jogador jogador = JogadorMapper.fromJogadorRegisterDTO(jogadorRegisterDTO);
+        return jogadorService.saveJogador(jogador, timeId);
     }
 
     @GetMapping()
     public List<Jogador> showAllJogador() {
-       return jogadorService.showAllJogador();
+        return jogadorService.showAllJogador();
 
     }
 
