@@ -1,8 +1,5 @@
 package br.com.zup.management_time_football.controllers.dtos;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -24,6 +21,8 @@ public class JogadorUpdateDTO {
     private String sexo;
     @NotNull
     private LocalDate dataNasc;
+    @NotNull
+    private EnderecoUpdateDTO endereco;
 
     public JogadorUpdateDTO() {}
 
@@ -51,4 +50,9 @@ public class JogadorUpdateDTO {
     public @NotNull LocalDate getDataNasc() {return dataNasc;}
 
     public void setDataNasc(@NotNull LocalDate dataNasc) {this.dataNasc = dataNasc;}
+
+    public EnderecoUpdateDTO getEndereco() {return endereco;}
+
+    public void setEndereco(EnderecoUpdateDTO endereco) {this.endereco = endereco;}
+
 }

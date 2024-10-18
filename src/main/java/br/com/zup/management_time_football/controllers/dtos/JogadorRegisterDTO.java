@@ -20,6 +20,8 @@ public class JogadorRegisterDTO {
     private String sexo;
     @NotNull
     private LocalDate dataNasc;
+    @NotNull
+    private EnderecoRegisterDTO endereco;
 
     public JogadorRegisterDTO() {}
 
@@ -43,5 +45,9 @@ public class JogadorRegisterDTO {
     public @NotNull LocalDate getDataNasc() {return dataNasc;}
 
     public void setDataNasc(@NotNull LocalDate dataNasc) {this.dataNasc = dataNasc;}
+
+    public EnderecoRegisterDTO getEndereco() {return endereco;}
+
+    public void setEndereco(EnderecoRegisterDTO endereco) {this.endereco = endereco;}
 }
 

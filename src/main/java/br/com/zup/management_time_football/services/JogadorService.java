@@ -43,27 +43,23 @@ public class JogadorService {
     public Jogador updateJogador(Jogador jogador) {
         Jogador jogadorDB = findJogador(jogador.getId());
 
-        if (!jogadorDB.getNome().equals(jogador.getNome())) {
-            jogadorDB.setNome(jogador.getNome());
-        }
-        if (jogadorDB.getIdade() != jogador.getIdade()) {
-            jogadorDB.setIdade(jogador.getIdade());
-        }
+
         if (!jogadorDB.getCpf().equals(jogador.getCpf())) {
             if (jogadorRepository.existsByCpf(jogador.getCpf())) {
                 throw new IllegalArgumentException("Já existe um jogador cadastrado com esse CPF.");
             }
             jogadorDB.setCpf(jogador.getCpf());
         }
-        if (!jogadorDB.getDataNasc().equals(jogador.getDataNasc())) {
-            jogadorDB.setDataNasc(jogador.getDataNasc());
-        }
-        if (!jogadorDB.getSexo().equals(jogador.getSexo())) {
-            jogadorDB.setSexo(jogador.getSexo());
-        }
 
-        return saveJogador(jogadorDB);
+        jogadorDB.setNome(jogador.getNome());
+        jogadorDB.setIdade(jogador.getIdade());
+        jogadorDB.setSexo(jogador.getSexo());
+        jogadorDB.setDataNasc(jogador.getDataNasc());
+        jogadorDB.setEndereco(jogador.getEndereco());
+
+        return jogadorRepository.save(jogadorDB);
     }
+
 
     public void deleteJogador(Long id) {
         Jogador jogador = findJogador(id);

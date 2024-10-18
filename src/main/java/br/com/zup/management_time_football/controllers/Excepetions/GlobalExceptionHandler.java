@@ -1,4 +1,4 @@
-package br.com.zup.management_time_football.controllers;
+package br.com.zup.management_time_football.controllers.Excepetions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

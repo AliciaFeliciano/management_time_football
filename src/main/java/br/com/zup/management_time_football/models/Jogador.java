@@ -23,6 +23,10 @@ public class Jogador {
     private String sexo;
     private LocalDate dataNasc;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
     public Jogador(){}
 
     public Long getId() {return id;}
@@ -48,4 +52,8 @@ public class Jogador {
     public LocalDate getDataNasc() {return dataNasc;}
 
     public void setDataNasc(LocalDate dataNasc) {this.dataNasc = dataNasc;}
+
+    public Endereco getEndereco() {return endereco;}
+
+    public void setEndereco(Endereco endereco) {this.endereco = endereco;}
 }

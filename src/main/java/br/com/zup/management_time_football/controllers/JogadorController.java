@@ -38,9 +38,10 @@ public class JogadorController {
     }
 
     @PutMapping("/{id}")
-    public Jogador updateJogador(@RequestBody @Valid JogadorUpdateDTO JogadorUpdateDTO){
-        return jogadorService.updateJogador(JogadorMapper.fromJogadorUpdateDTO(JogadorUpdateDTO));
+    public Jogador updateJogador(@PathVariable Long id, @RequestBody @Valid JogadorUpdateDTO jogadorUpdateDTO) {
+        return jogadorService.updateJogador(JogadorMapper.fromJogadorUpdateDTO(jogadorUpdateDTO));
     }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
